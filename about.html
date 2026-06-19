@@ -1,0 +1,830 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | The Attuned Practice — Private Pilates Studio, Bukit Timah Singapore</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,300;6..96,400&family=Playfair+Display:wght@700&family=Spectral:ital,wght@1,300&family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #021c0e;
+      --gold: #c9a55a;
+      --gold-faint: rgba(201,165,90,0.18);
+      --cream: #e8dfc8;
+      --cream-dim: rgba(232,223,200,0.7);
+      --gold-hover: #e0c070;
+      --header-glass: rgba(2, 28, 14, 0.82);
+      --header-glass-scrolled: rgba(2, 28, 14, 0.4);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--green);
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .fascia-ribbon {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 60;
+      transform: scaleX(-1);
+    }
+    .fascia-ribbon.is-scrolled {
+      z-index: 0;
+    }
+    .fascia-ribbon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      opacity: 0.35;
+      filter: blur(0.4px);
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: end;
+      padding: 28px 44px 18px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--header-glass);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.25s ease;
+    }
+    header.is-scrolled {
+      background: var(--header-glass-scrolled);
+      border-bottom-color: var(--gold-faint);
+    }
+
+    .header-left {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cream);
+      line-height: 1.9;
+      opacity: 0.6;
+      align-self: end;
+    }
+
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-style: normal !important;
+      font-size: 54px;
+      letter-spacing: -0.03em;
+      color: var(--gold);
+      white-space: nowrap;
+      text-align: center;
+      align-self: end;
+      line-height: 1;
+      transform: translateY(6px);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .brand:hover {
+      opacity: 0.8;
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      cursor: pointer;
+      justify-self: end;
+      align-self: center;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 1.5px;
+      background: var(--gold);
+      opacity: 0.85;
+    }
+    .hamburger:hover span { opacity: 0.5; }
+
+    /* ── NAV OVERLAY ── */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--green);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-12px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+    .nav-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .nav-overlay-close {
+      position: absolute;
+      top: 28px;
+      right: 44px;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 32px;
+      font-weight: 300;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.85;
+      font-family: 'Inter', sans-serif;
+    }
+    .nav-overlay-close:hover { opacity: 1; }
+
+    .nav-overlay-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-overlay-list a {
+      font-family: 'Bodoni Moda', serif;
+      font-size: clamp(34px, 6vw, 60px);
+      font-weight: 400;
+      color: var(--cream);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-overlay-list a:hover,
+    .nav-overlay-list a:focus-visible { color: var(--gold-hover); }
+
+    .cta-button {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(10px, 0.85vw, 12px);
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 14px 32px;
+      text-decoration: none;
+      opacity: 0.85;
+      transition: opacity 0.2s, background 0.2s;
+    }
+    .cta-button:hover {
+      opacity: 1;
+      background: rgba(201,165,90,0.1);
+    }
+
+    /* ── MAIN / ARTICLE ── */
+    main {
+      flex: 1;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      padding: 140px 44px 160px;
+    }
+
+    .about-article {
+      width: 100%;
+      max-width: 760px;
+      display: flex;
+      flex-direction: column;
+      gap: 88px;
+    }
+
+    .about-section {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .about-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .about-section {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    .section-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-hover);
+      opacity: 0.85;
+      margin-bottom: -18px;
+    }
+
+    .section-title {
+      font-family: 'Spectral', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(30px, 3.4vw, 40px);
+      line-height: 1.18;
+      letter-spacing: -0.005em;
+      color: var(--cream);
+      margin-bottom: -22px;
+    }
+
+    .section-rule {
+      width: 50px;
+      height: 0.5px;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+
+    .about-prose {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(14px, 1.15vw, 16px);
+      font-weight: 300;
+      color: var(--cream);
+      opacity: 0.8;
+      line-height: 1.9;
+      letter-spacing: 0.01em;
+      max-width: 620px;
+    }
+
+    .about-prose + .about-prose {
+      margin-top: -8px;
+    }
+
+    /* ── TRAINING GRID ── */
+    .training-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px 56px;
+    }
+
+    .training-block {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .training-block-title {
+      font-family: 'Spectral', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(18px, 1.6vw, 21px);
+      color: var(--gold-hover);
+      letter-spacing: 0.01em;
+    }
+
+    .training-block-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--cream);
+      opacity: 0.55;
+      letter-spacing: 0.04em;
+      margin-top: -10px;
+    }
+
+    .training-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .training-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--cream);
+      opacity: 0.75;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .training-list li::before {
+      content: '';
+      position: absolute;
+      left: 1px;
+      top: 6px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      opacity: 0.85;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonial-carousel {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      width: 100%;
+      margin-top: 24px;
+    }
+
+    .testimonial-arrow {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+    .testimonial-arrow:hover {
+      opacity: 1;
+    }
+    .testimonial-arrow:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+    .testimonial-arrow svg {
+      width: 19px;
+      height: 19px;
+      display: block;
+    }
+
+    .testimonial-carousel.no-nav .testimonial-arrow {
+      display: none;
+    }
+
+    .testimonial-scroll {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .testimonial-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .testimonial-list {
+      display: flex;
+      flex-direction: row;
+      gap: 32px;
+    }
+
+    .testimonial {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .testimonial-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(17px, 1.7vw, 20px);
+      line-height: 1.55;
+      color: var(--cream);
+      opacity: 0.85;
+      letter-spacing: 0.01em;
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .testimonial-quote::before {
+      content: '"';
+      position: absolute;
+      left: 0;
+      top: -6px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 38px;
+      color: var(--gold);
+      opacity: 0.55;
+      line-height: 1;
+    }
+
+    .quote-close {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.85em;
+      color: var(--gold);
+      opacity: 0.55;
+      margin-left: 2px;
+    }
+
+    .testimonial-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-hover);
+      opacity: 0.7;
+      text-align: center;
+      align-self: center;
+    }
+
+    /* always 1 card visible — arrows handle navigation */
+
+    .testimonial-quote[lang="zh"] {
+      font-family: "Songti SC", "Noto Serif SC", serif;
+      letter-spacing: 0.04em;
+      line-height: 1.8;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 22px 44px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      background: transparent;
+      border-top: 1px solid var(--gold-faint);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .footer-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.09em;
+      color: var(--cream);
+      opacity: 0.45;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .footer-links a:hover { opacity: 0.8; }
+
+    .footer-sep {
+      color: var(--cream);
+      opacity: 0.25;
+      font-size: 12px;
+    }
+
+    .footer-copy {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      letter-spacing: 0.02em;
+      color: var(--cream);
+      opacity: 1;
+      text-transform: none;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      html, body { overflow: auto; }
+      .page { height: auto; min-height: 100vh; }
+
+      header {
+        padding: 20px 24px 14px;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        gap: 6px;
+      }
+      .brand {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        text-align: center;
+        font-size: 38px;
+      }
+      .header-left {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        text-align: center;
+        font-size: 10px;
+      }
+      .hamburger {
+        grid-column: 2;
+        grid-row: 1;
+        position: absolute;
+        right: 24px;
+        top: 22px;
+      }
+
+      main {
+        padding: 36px 24px 64px;
+      }
+
+      .about-article {
+        gap: 64px;
+      }
+
+      .training-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .testimonial-carousel {
+        gap: 10px;
+      }
+
+      .testimonial-arrow {
+        width: 32px;
+        height: 32px;
+      }
+
+      .fascia-ribbon { opacity: 0.5; }
+
+      .nav-overlay-list a { font-size: clamp(30px, 11vw, 46px); }
+      .nav-overlay-close { top: 22px; right: 24px; font-size: 28px; }
+      .nav-overlay { gap: 36px; }
+
+      footer { padding: 14px 24px; flex-wrap: wrap; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- FASCIA RIBBON -->
+  <div class="fascia-ribbon" aria-hidden="true">
+    <img src="images/fascia-ribbon.jpg" alt="" />
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      Private Home Pilates Studio<br />Bukit Timah · Singapore
+    </div>
+    <a href="index.html" class="brand">The Attuned Practice</a>
+    <div class="hamburger" id="navToggle" role="button" aria-label="Open menu" aria-expanded="false" aria-controls="navOverlay">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <!-- NAV OVERLAY -->
+  <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
+    <button class="nav-overlay-close" id="navClose" aria-label="Close menu">×</button>
+    <ul class="nav-overlay-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="approach.html">Approach</a></li>
+      <li><a href="sessions.html">Sessions</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+    <a href="https://wa.me/6585885889" class="cta-button" target="_blank" rel="noopener">Contact</a>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <article class="about-article">
+
+      <!-- THE STORY -->
+      <section class="about-section">
+        <span class="section-eyebrow">About Dorina</span>
+        <h1 class="section-title">The Story Behind the Practice</h1>
+        <div class="section-rule"></div>
+        <p class="about-prose">Dorina's story with Pilates began after years of recurring lower back pain from office work in her twenties. Different treatments brought temporary relief, but the pain kept returning. Two pregnancies and years of childminding added further strain.</p>
+        <p class="about-prose">Pilates became the turning point in 2008. The improvement sparked a deeper interest in movement, posture, anatomy, body mechanics, and teaching.</p>
+        <p class="about-prose">The practice today is shaped by both training and lived experience: back pain, knee, foot and elbow injuries, diastasis recti recovery after pregnancy, physiotherapy, fascia movement training, and an ongoing strength training journey. This gives the teaching a practical understanding of what it can feel like to rebuild strength, trust, and confidence in the body.</p>
+      </section>
+
+      <!-- TRAINING & CERTIFICATIONS -->
+      <section class="about-section">
+        <span class="section-eyebrow">Credentials</span>
+        <h1 class="section-title">Training &amp; Certifications</h1>
+        <div class="section-rule"></div>
+
+        <div class="training-grid">
+          <div class="training-block">
+            <span class="training-block-title">Pilates Training</span>
+            <ul class="training-list">
+              <li>PAI All Populations Mat and Reformer Certified</li>
+              <li>PAI Anatomy, Biomechanics and Posture Analysis</li>
+              <li>PAI Golden Pilates and Stretch Band</li>
+              <li>Stott Pilates Matwork, Reformer and CCB training</li>
+            </ul>
+          </div>
+
+          <div class="training-block">
+            <span class="training-block-title">Fascia Movement Training</span>
+            <span class="training-block-sub">Certified FAMO Fascia Movement Teacher</span>
+            <ul class="training-list">
+              <li>Anatomy Trains in Motion</li>
+              <li>Fascia Movement Focus</li>
+              <li>Fascia Movement Practice 1</li>
+              <li>FAMO Body Reading and Rebalancing</li>
+            </ul>
+          </div>
+
+          <div class="training-block">
+            <span class="training-block-title">Special Interest Training</span>
+            <ul class="training-list">
+              <li>Hyper/Hypo Mobility: A Trainer's Perspective</li>
+              <li>C-Section Scars: Dissection Specialty Course</li>
+              <li>Beyond Beauty: How Myofascia, Nerves and Circulation Shape Aging</li>
+              <li>Female Clients: The Gluteal Floor, Pelvic Bone Density, The Diastasis Recti Solution, Effortless Weight Bearing</li>
+              <li>Trigger Point Therapy Level 1 &amp; 2</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="about-section">
+        <span class="section-eyebrow">In Their Words</span>
+        <h1 class="section-title">Testimonials</h1>
+        <div class="section-rule"></div>
+
+        <div class="testimonial-carousel" id="testimonialCarousel">
+          <button class="testimonial-arrow" id="testimonialPrev" aria-label="Previous testimonial">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6" /></svg>
+          </button>
+          <div class="testimonial-scroll" id="testimonialScroll">
+            <div class="testimonial-list">
+              <div class="testimonial">
+                <p class="testimonial-quote" lang="zh">我从来没想过自己的身体可以这样灵活。每一次的训练都让我对自己的身体多一份了解，也多一份信心。<span class="quote-close">"</span></p>
+                <span class="testimonial-name">— SuChing T.</span>
+              </div>
+              <div class="testimonial">
+                <p class="testimonial-quote">Patient, precise, and genuinely invested in how you feel — not just how you look.<span class="quote-close">"</span></p>
+                <span class="testimonial-name">— Victoria N.</span>
+              </div>
+              <div class="testimonial">
+                <p class="testimonial-quote">Dorina's professionalism and attention to detail are exceptional. With her guidance, I've seen significant improvement in several long-standing issues that I had struggled to resolve for years. She has a remarkable ability to identify underlying movement patterns and tailor each session accordingly.<br><br>What sets her apart is her balanced approach. She knows exactly when to challenge you and when to hold back, ensuring steady progress without unnecessary strain. I always leave sessions feeling stronger, more aware of my body, and confident that I'm in expert hands.<span class="quote-close">"</span></p>
+                <span class="testimonial-name">— M. Huang</span>
+              </div>
+              <div class="testimonial">
+                <p class="testimonial-quote">Dorina is an excellent Pilates instructor who is extremely dedicated to helping her clients improve, steadfast, knowledgeable and very caring.<br><br>I have always had problems "feeling" the proper engagement in my muscles because I have low muscle awareness and am hyper flexible. However, my tricky body condition has never been a challenge for Dorina. She just magically knows the precise cues I need to help me get the most out of each movement. This is no doubt down to her keen powers of observation and her ability to translate her reservoir of knowledge into practical tips for her clients.<br><br>I always marvel at how wonderfully aligned my body feels after each session with Dorina and have been practicing Pilates for close to 15 years now. Thank you Dorina for helping me make seemingly small adjustments to the way I engage my muscles, which totally transforms the way I now carry my body!<span class="quote-close">"</span></p>
+                <span class="testimonial-name">— SC</span>
+              </div>
+            </div>
+          </div>
+          <button class="testimonial-arrow" id="testimonialNext" aria-label="Next testimonial">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6" /></svg>
+          </button>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <span class="footer-sep">|</span>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+    <span class="footer-copy">© 2026 The Attuned Practice</span>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var toggle = document.getElementById('navToggle');
+    var overlay = document.getElementById('navOverlay');
+    var closeBtn = document.getElementById('navClose');
+    var header = document.querySelector('header');
+
+    if (toggle && overlay && closeBtn) {
+      toggle.addEventListener('click', function () {
+        overlay.classList.add('is-open');
+        overlay.setAttribute('aria-hidden', 'false');
+        toggle.setAttribute('aria-expanded', 'true');
+      });
+      closeBtn.addEventListener('click', function () {
+        overlay.classList.remove('is-open');
+        overlay.setAttribute('aria-hidden', 'true');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    if (header) {
+      var ribbon = document.querySelector('.fascia-ribbon');
+      window.addEventListener('scroll', function () {
+        var scrolled = window.scrollY > 8;
+        header.classList.toggle('is-scrolled', scrolled);
+        if (ribbon) ribbon.classList.toggle('is-scrolled', scrolled);
+      }, { passive: true });
+    }
+  })();
+
+  (function () {
+    var sections = document.querySelectorAll('.about-section');
+    if (!sections.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach(function (s) { s.classList.add('is-visible'); });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    sections.forEach(function (s) { observer.observe(s); });
+  })();
+</script>
+
+<script>
+  (function () {
+    const carousel = document.getElementById('testimonialCarousel');
+    const scrollEl = document.getElementById('testimonialScroll');
+    const prevBtn = document.getElementById('testimonialPrev');
+    const nextBtn = document.getElementById('testimonialNext');
+    if (!carousel || !scrollEl || !prevBtn || !nextBtn) return;
+
+    function cardWidth() {
+      const card = scrollEl.querySelector('.testimonial');
+      if (!card) return 0;
+      const gap = parseFloat(getComputedStyle(scrollEl.querySelector('.testimonial-list')).gap) || 0;
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    function cardCount() {
+      return scrollEl.querySelectorAll('.testimonial').length;
+    }
+
+    function currentIndex() {
+      const cw = cardWidth();
+      return cw ? Math.round(scrollEl.scrollLeft / cw) : 0;
+    }
+
+    function goToIndex(i) {
+      const cw = cardWidth();
+      scrollEl.scrollTo({ left: i * cw, behavior: 'smooth' });
+    }
+
+    function updateState() {
+      const hasOverflow = scrollEl.scrollWidth - scrollEl.clientWidth > 4;
+      carousel.classList.toggle('no-nav', !hasOverflow);
+    }
+
+    prevBtn.addEventListener('click', function () {
+      const count = cardCount();
+      let idx = currentIndex() - 1;
+      if (idx < 0) idx = count - 1;
+      goToIndex(idx);
+    });
+    nextBtn.addEventListener('click', function () {
+      const count = cardCount();
+      let idx = currentIndex() + 1;
+      if (idx >= count) idx = 0;
+      goToIndex(idx);
+    });
+
+    window.addEventListener('resize', updateState);
+    updateState();
+  })();
+</script>
+
+</body>
+</html>
