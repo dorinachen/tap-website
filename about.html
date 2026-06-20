@@ -45,11 +45,8 @@
       left: 0;
       width: 100%;
       pointer-events: none;
-      z-index: 60;
-      transform: scaleX(-1);
-    }
-    .fascia-ribbon.is-scrolled {
       z-index: 0;
+      transform: scaleX(-1);
     }
     .fascia-ribbon img {
       width: 100%;
@@ -70,14 +67,16 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: var(--header-glass);
-      backdrop-filter: blur(7px);
-      -webkit-backdrop-filter: blur(7px);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
       border-bottom: 1px solid transparent;
-      transition: border-color 0.25s ease;
+      transition: background 0.25s ease, border-color 0.25s ease;
     }
     header.is-scrolled {
       background: var(--header-glass-scrolled);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
       border-bottom-color: var(--gold-faint);
     }
 
@@ -227,14 +226,6 @@
       display: flex;
       flex-direction: column;
       gap: 28px;
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
-    }
-
-    .about-section.is-visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -536,13 +527,13 @@
         grid-column: 1 / -1;
         grid-row: 1;
         text-align: center;
-        font-size: 38px;
+        font-size: 32px;
       }
       .header-left {
         grid-column: 1 / -1;
         grid-row: 2;
         text-align: center;
-        font-size: 10px;
+        font-size: 9px;
       }
       .hamburger {
         grid-column: 2;
@@ -683,14 +674,6 @@
           </button>
           <div class="testimonial-scroll" id="testimonialScroll">
             <div class="testimonial-list">
-              <div class="testimonial">
-                <p class="testimonial-quote" lang="zh">我从来没想过自己的身体可以这样灵活。每一次的训练都让我对自己的身体多一份了解，也多一份信心。<span class="quote-close">"</span></p>
-                <span class="testimonial-name">— SuChing T.</span>
-              </div>
-              <div class="testimonial">
-                <p class="testimonial-quote">Patient, precise, and genuinely invested in how you feel — not just how you look.<span class="quote-close">"</span></p>
-                <span class="testimonial-name">— Victoria N.</span>
-              </div>
               <div class="testimonial">
                 <p class="testimonial-quote">Dorina's professionalism and attention to detail are exceptional. With her guidance, I've seen significant improvement in several long-standing issues that I had struggled to resolve for years. She has a remarkable ability to identify underlying movement patterns and tailor each session accordingly.<br><br>What sets her apart is her balanced approach. She knows exactly when to challenge you and when to hold back, ensuring steady progress without unnecessary strain. I always leave sessions feeling stronger, more aware of my body, and confident that I'm in expert hands.<span class="quote-close">"</span></p>
                 <span class="testimonial-name">— M. Huang</span>

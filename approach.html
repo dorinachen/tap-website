@@ -48,14 +48,11 @@
       width: 100%;
       height: 92vh;
       pointer-events: none;
-      z-index: 60;
+      z-index: 0;
       overflow: hidden;
       -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 16%, black 100%);
       mask-image: linear-gradient(to bottom, transparent 0%, black 16%, black 100%);
       transform: translateY(-50%) rotate(-3.5deg) scale(1.08);
-    }
-    .fascia-ribbon.is-scrolled {
-      z-index: 0;
     }
     .fascia-ribbon img {
       width: 100%;
@@ -76,14 +73,16 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: var(--header-glass);
-      backdrop-filter: blur(7px);
-      -webkit-backdrop-filter: blur(7px);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
       border-bottom: 1px solid transparent;
-      transition: border-color 0.25s ease;
+      transition: background 0.25s ease, border-color 0.25s ease;
     }
     header.is-scrolled {
       background: var(--header-glass-scrolled);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
       border-bottom-color: var(--gold-faint);
     }
 
@@ -233,14 +232,6 @@
       display: flex;
       flex-direction: column;
       gap: 28px;
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
-    }
-
-    .approach-section.is-visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -366,13 +357,13 @@
         grid-column: 1 / -1;
         grid-row: 1;
         text-align: center;
-        font-size: 38px;
+        font-size: 32px;
       }
       .header-left {
         grid-column: 1 / -1;
         grid-row: 2;
         text-align: center;
-        font-size: 10px;
+        font-size: 9px;
       }
       .hamburger {
         grid-column: 2;
